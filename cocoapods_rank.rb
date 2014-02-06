@@ -47,6 +47,8 @@ File.open("cocoapods_rank.md", "w+") do |f|
   f.puts "\n"
   f.puts "Sorted by stargazers count of GitHub repo (as of #{Time.now})"
   f.puts "\n"
+  f.puts "[Source code](https://github.com/luvtechno/cocoapods_rank)"
+  f.puts "\n"
 
   github_specs.each do |spec|
     puts "#{spec.name}: #{spec.github_repo.stargazers_count}"
