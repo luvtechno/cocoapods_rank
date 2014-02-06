@@ -45,6 +45,8 @@ github_specs = github_specs.sort_by { |spec| - spec.github_repo.stargazers_count
 File.open("cocoapods_rank.md", "w+") do |f|
   f.puts "# CocoaPods Rank"
   f.puts "\n\n"
+  f.puts "Sorted by stargazers count of GitHub repo"
+  f.puts "\n\n"
 
   github_specs.each do |spec|
     puts "#{spec.name}: #{spec.github_repo.stargazers_count}"
