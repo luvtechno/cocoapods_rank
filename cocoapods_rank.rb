@@ -5,7 +5,7 @@ require 'pry'
 class Pod::Specification
   class << self
     def github_client
-      client = Octokit::Client.new(oauth_token: ENV['GITHUB_TOKEN'])
+      @client ||= Octokit::Client.new(oauth_token: ENV['GITHUB_TOKEN'])
     end
   end
 
@@ -32,7 +32,7 @@ specs = Pod::SourcesManager.all_sets.map(&:specification)
 
 github_specs = specs.select do |spec|
   puts "Checking #{spec.name}"
-  sleep 1 # Be nice to GitHub
+  # sleep 1 # Be nice to GitHub
   begin
     spec.github? && !!spec.github_repo
   rescue Octokit::NotFound
@@ -58,4 +58,4 @@ end
 # stargazers_count
 # forks_count
 
-binding.pry
+# binding.pry
