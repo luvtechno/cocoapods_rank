@@ -28,7 +28,7 @@ class Pod::Specification
 end
 
 specs = Pod::SourcesManager.all_sets.map(&:specification)
-specs = specs.first(10)
+# specs = specs.first(5) # For testing
 
 github_specs = specs.select do |spec|
   puts "Checking #{spec.name}"
@@ -42,8 +42,17 @@ end
 github_specs = github_specs.sort_by { |spec| - spec.github_repo.stargazers_count }
 
 
-github_specs.each do |spec|
-  puts "#{spec.name}: #{spec.github_repo.stargazers_count}"
+File.open("cocoapods_rank.md", "w+") do |f|
+  f.puts "# CocoaPods Rank"
+  f.puts "\n\n"
+
+  github_specs.each do |spec|
+    puts "#{spec.name}: #{spec.github_repo.stargazers_count}"
+    f.puts "* #{spec.github_repo.stargazers_count} [#{spec.name}](#{spec.homepage})"
+  end
+
+  f.puts "\n\n"
+  f.puts "Genrated by [@luvtechno](https://github.com/luvtechno/)"
 end
 
 # stargazers_count
